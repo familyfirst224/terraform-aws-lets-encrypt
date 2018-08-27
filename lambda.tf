@@ -34,28 +34,6 @@ data "aws_iam_policy_document" "lambda" {
       "acm:GetCertificate",
       "acm:ImportCertificate",
       "acm:ListCertificates",
-      "route53:ListHostedZones",
-    ]
-
-    resources = [
-      "*",
-    ]
-  }
-
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "route53:ChangeResourceRecordSets",
-      "route53:GetChange",
-      "ssm:GetParameter*",
-      "ssm:PutParameter*",
-    ]
-
-    resources = [
-      "arn:aws:route53:::change/*",
-      "arn:aws:route53:::hostedzone/${var.hosted_zone_id}",
-      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.name}/*",
     ]
   }
 }
